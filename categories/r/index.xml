@@ -17,11 +17,7 @@
       <pubDate>Sat, 02 Jun 2018 00:00:00 +0000</pubDate>
       
       <guid>/post/eda-gun-violence-us/</guid>
-      <description>Load libraries:
-library(ggplot2) library(readr) library(RColorBrewer) library(reshape2) library(dplyr) library(plotly) library(scales) Read the dataset:
-df &amp;lt;- read_csv(&amp;quot;~/R\ Projects/Gun\ Violence/Gun-Violence/data/gun-violence-data_01-2013_03-2018.csv&amp;quot;) There are a few columns we don’t care about - drop those
-gun &amp;lt;- select(df, -c(incident_url, source_url, incident_url_fields_missing, congressional_district, sources, state_house_district, state_senate_district)) How many gun casualties (defined as number killed and injured) were there for each year?
-gun %&amp;gt;% group_by(Year = format(date, &amp;quot;%Y&amp;quot;)) %&amp;gt;% summarize(n = sum(n_injured + n_killed)) %&amp;gt;% ggplot(aes(x = Year, y = n)) + geom_col() Clearly there are missing data from 2013, and 2018 isn’t complete yet.</description>
+      <description>Overview Having a background and keen interest in martial arts and self-defense for many years, I have long been wondering about the state of gun violence in the United States. It seems like I hear about someone getting killed or injured because of a gun every single day, and it seems like it’s getting worse. Living in Chicago and having grown up in Baltimore, I am often exposed (daily; sometimes multiple times per day) to news reports about gang violence involving guns, and I am curious about how these cities compare to other places in the United States.</description>
     </item>
     
   </channel>
