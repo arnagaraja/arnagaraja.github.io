@@ -6,19 +6,10 @@
     <description>Recent content in Posts on Arpun&#39;s Project Website</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 05 Jun 2018 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sat, 02 Jun 2018 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/post/index.xml" rel="self" type="application/rss+xml" />
     
-    
-    <item>
-      <title>Test Draft</title>
-      <link>/post/test-draft/</link>
-      <pubDate>Tue, 05 Jun 2018 00:00:00 +0000</pubDate>
-      
-      <guid>/post/test-draft/</guid>
-      <description>This shouldn’t display to the public.</description>
-    </item>
     
     <item>
       <title>Gun Violence in the US: Exploratory Data Analysis</title>
