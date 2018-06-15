@@ -6,10 +6,20 @@
     <description>Recent content in Projects on Arpun&#39;s Personal Website</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sat, 02 Jun 2018 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 15 Jun 2018 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/project/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Visualizing Tweets</title>
+      <link>/project/visualizing-tweets/</link>
+      <pubDate>Fri, 15 Jun 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/project/visualizing-tweets/</guid>
+      <description>Overview I don&amp;rsquo;t use Twitter. But, a lot of people do: globally, there are about 6000 tweets per second. So, I decided to make a visualization of tweets over time, using their geolocation tags to plot them on a map.
+First things first - how do I scrape data from Twitter? It took a little digging, but I found the excellent streamR package, which interfaces with the Twitter API. Twitter&amp;rsquo;s API lets you sample the stream of public tweets in realtime.</description>
+    </item>
     
     <item>
       <title>Gun Violence in the US: Exploratory Data Analysis</title>

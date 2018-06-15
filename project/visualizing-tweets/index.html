@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en-us">
+    <head>
+         
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Visualizing Tweets</title>
+        
+        <style>
+
+    html body {
+        font-family: 'Raleway', sans-serif;
+        background-color: white;
+    }
+
+    :root {
+        --accent: red;
+        --border-width:  5px ;
+    }
+
+</style>
+
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+
+
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/agate.min.css"> 
+
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+ 
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/go.min.js"></script>  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/haskell.min.js"></script>  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/kotlin.min.js"></script>  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/scala.min.js"></script>  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/swift.min.js"></script>  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/r.min.js"></script> 
+
+    <script>hljs.initHighlightingOnLoad();</script>
+
+
+
+
+
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+
+<script>$(document).on('click', function() { $('.collapse').collapse('hide'); })</script>
+ <meta name="generator" content="Hugo 0.41" />
+        
+
+        
+        
+        <script async src="https://www.googletagmanager.com/gtag/js?id=UA-120438136-1"></script>
+        <script>
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments)};
+          gtag('js', new Date());
+
+          gtag('config', 'UA-120438136-1');
+        </script>
+        
+    </head>
+
+    
+    
+    <script type="text/javascript" async
+      src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+    </script>
+    
+
+    <body>
+         
+        <nav class="navbar navbar-default navbar-fixed-top">
+
+            <div class="container">
+
+                <div class="navbar-header">
+
+                    <a class="navbar-brand visible-xs" href="#">Visualizing Tweets</a>
+
+                    <button class="navbar-toggle" data-target=".navbar-collapse" data-toggle="collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+
+                </div>
+
+                <div class="collapse navbar-collapse">
+
+                    
+                        <ul class="nav navbar-nav">
+                            
+                                <li><a href="/">Home</a></li>
+                            
+                                <li><a href="/project/">Projects</a></li>
+                            
+                                <li><a href="/code/">Code</a></li>
+                            
+                        </ul>
+                    
+
+                    
+                        <ul class="nav navbar-nav navbar-right">
+                            
+                                <li class="navbar-icon"><a href="mailto:arnagaraja@gmail.com"><i class="fa fa-envelope-o"></i></a></li>
+                            
+                                <li class="navbar-icon"><a href="https://github.com/arnagaraja/"><i class="fa fa-github"></i></a></li>
+                            
+                                <li class="navbar-icon"><a href="https://www.linkedin.com/in/arpun-nagaraja-01249b5b/"><i class="fa fa-linkedin"></i></a></li>
+                            
+                        </ul>
+                    
+
+                </div>
+
+            </div>
+
+        </nav>
+
+
+<main>
+
+    <div class="item">
+
+    
+    
+    
+
+    
+    
+
+    <h4><a href="/project/visualizing-tweets/">Visualizing Tweets</a></h4>
+    <h5>June 15, 2018</h5>
+    
+    <a href="/tags/r"><kbd class="item-tag">R</kbd></a>
+    
+    <a href="/tags/data-visualization"><kbd class="item-tag">Data Visualization</kbd></a>
+    
+    <a href="/tags/api"><kbd class="item-tag">API</kbd></a>
+    
+    <a href="/tags/streamr"><kbd class="item-tag">streamR</kbd></a>
+    
+    <a href="/tags/animation"><kbd class="item-tag">animation</kbd></a>
+    
+
+</div>
+
+
+    <br> <div class="text-justify">
+
+<h1 id="overview">Overview</h1>
+
+<p>I don&rsquo;t use Twitter. But, a lot of people do: globally, <a href="https://www.internetlivestats.com/twitter-statistics/">there are about 6000 tweets <em>per second</em></a>. So, I decided to make a visualization of tweets over time, using their geolocation tags to plot them on a map.</p>
+
+<p>First things first - how do I scrape data from Twitter? It took a little digging, but I found the excellent <a href="https://cran.r-project.org/web/packages/streamR/index.html">streamR package</a>, which interfaces with the Twitter API. Twitter&rsquo;s API lets you sample the stream of public tweets in realtime. <code>streamR</code> provides some very useful functions that let you filter that stream by different variables (like location or username), as well as parse the tweets you get into a tidy data frame.</p>
+
+<h1 id="setup">Setup</h1>
+
+<p>I sampled the Twitter stream for 7 hours, from about 6 am Eastern to 10 am Pacific, and recorded only those tweets that were both public and located within the US mainland (more or less). The goal was to see how the concentration of tweets in the western part of the US increases as people start to wake up. (Thank you to my good friend, Alex, for giving me that idea!)</p>
+
+<p>The way Twitter filters for location is by using latitude and longitude coordinates to draw a rectangle around a given area on a map. Because the US isn&rsquo;t perfectly rectangular, it did pull some data from Canada and Mexico. It is possible to filter these data out after the fact, but for my purposes I decided to leave them.</p>
+
+<p>In the end, I captured 609499 tweets in the seven hour window, with an average of 1451 tweets per minute, and a range of 677-2562 tweets per minute. Again, remember that this is just a subset of a random sample of all the public tweets that are happening.</p>
+
+<h1 id="data-visualization">Data Visualization</h1>
+
+<p>Here&rsquo;s what the map looks like!</p>
+
+<div style='position:relative;padding-bottom:50%'><iframe src='https://gfycat.com/ifr/HardtofindExemplaryCanvasback?hd=1' frameborder='0' scrolling='no' width='100%' height='100%' style='position:absolute;top:0;left:0;' allowfullscreen></iframe></div>
+
+<h1 id="methods">Methods</h1>
+
+<p>Before being able to pull data from Twitter, I first had to create an app at <a href="https://apps.twitter.com">apps.twitter.com</a>. Then I used the <code>ROAuth</code> package and provided my app&rsquo;s consumer key and consumer secret to establish the connection between R and my app. The code for how to do this is located in the documentation for the <code>streamR</code> package.</p>
+
+<h2 id="sampling-the-twitter-stream">Sampling the Twitter Stream</h2>
+
+<p>I used the <code>filterStream</code> function in <code>streamR</code> and gave the <code>locations</code> parameter the coordinates of the bounding box for the US mainland.</p>
+
+<pre><code class="language-r">library(streamR)
+library(ROAuth)
+
+# AUTHENTICATE FIRST; CODE NOT SHOWN HERE
+
+# Coordinates for USA
+usa &lt;- c(-124.848974,24.396308,66.53076,49.23037)
+
+ # 7 hours = 25,200 seconds
+filterStream(file.name = &quot;sunriseTrack-7h.json&quot;, oauth = my_oauth, 
+            locations = usa, timeout = 25200)
+</code></pre>
+
+<h2 id="data-processing">Data Processing</h2>
+
+<p>I used the <code>parseTweets</code> function to create a tidy data frame of the tweets, and then did some manipulation to get the information I needed to make the plots.</p>
+
+<pre><code class="language-r">library(dplyr)
+library(lubridate)
+
+parsed &lt;- parseTweets(&quot;sunriseTrack-7h.json&quot;)
+parsed &lt;- tbl_df(parsed)
+
+# Grab the columns we want, filter out any NA entries, and do some mutations to get the data types we want
+
+locations &lt;- select(parsed, created_at, place_lat, place_lon, lat, lon) %&gt;% 
+      filter(!is.na(created_at)) %&gt;%
+      mutate(created_at = as.POSIXct(created_at, 
+                                     format = &quot;%a %b %d %H:%M:%S %z&quot;)) %&gt;%
+      rename(time = created_at) %&gt;%
+      mutate(time.by.min = format(time, 
+                                  format = &quot;%Y-%m-%d %H:%M %Z&quot;, 
+                                  tz = &quot;America/New_York&quot;))
+
+# Some of the place_lat and place_lon values are NA, but there are entries for lat and lon. So, copy the lat/lon values to place_lat and place_lon
+naInds &lt;- which(is.na(locations$place_lat) &amp; is.na(locations$place_lon))
+for (i in naInds) {
+            locations$place_lat[i] &lt;- locations$lat[i]
+            locations$place_lon[i] &lt;- locations$lon[i]
+}
+
+# Find the number of tweets per minute and exclude the first minute, since it's not a full 60 seconds
+
+tweets.by.minute &lt;- group_by(locations, time.by.min) %&gt;%
+      summarize(entries = table(time.by.min)) %&gt;%
+      arrange(time.by.min) %&gt;%
+      slice(2:n())
+</code></pre>
+
+<h2 id="creating-the-animation">Creating the Animation</h2>
+
+<p>I used the <a href="https://cran.r-project.org/web/packages/animation/index.html"><code>animation</code></a> package to create the GIF. For each frame of the GIF, I plotted the coordinates of each tweet for a particular minute. I also added a &ldquo;cool down&rdquo; period to make the animation a little cleaner: for any given minute (beyond minute 1), the points from the previous minute will fade by manipulating the alpha value.</p>
+
+<p>I set the interval to 0.25 seconds, giving a frame rate of 4 fps. I uploaded the GIF to Gfycat, so you can change the speed as needed.</p>
+
+<pre><code class="language-r">library(ggplot2)
+library(animation)
+library(maps)
+
+statemap &lt;- map_data(&quot;state&quot;)
+
+saveGIF ({
+      for(i in 1:nrow(tweets.by.minute)) {
+            
+            # Add &quot;cool down&quot; for points using alpha
+            if (i &gt; 1) {
+                  prev.match &lt;- match
+                  match &lt;- tweets.by.minute[i,1]
+                  df &lt;- filter(locations, time.by.min %in% c(match, prev.match)) %&gt;%
+                        arrange(time.by.min)
+                  len.match &lt;- nrow(filter(df, time.by.min %in% match))
+                  len.prevmatch &lt;- nrow(filter(df, time.by.min %in% prev.match))
+                  alphalist &lt;- c(rep(.2,len.prevmatch), rep(.7,len.match))
+                  df &lt;- ungroup(df) %&gt;%
+                        mutate(alphaVal = alphalist)
+                  
+            } else {
+                  match &lt;- tweets.by.minute[i,1]
+                  df &lt;- filter(locations, time.by.min %in% match) %&gt;% 
+                        mutate(alphaVal = rep(1, n()))
+            }
+            
+            p1 &lt;- ggplot(data = statemap, aes(x = long, y = lat, group = group)) +
+                  geom_polygon(fill = &quot;#55acee&quot;, color = &quot;white&quot;) + 
+                  coord_fixed(1.3, xlim = c(-130,-60), ylim = c(20,50)) + 
+                  geom_point(data = df, aes(x = place_lon, y = place_lat), 
+                             alpha = df$alphaVal, size = 3, inherit.aes = FALSE, 
+                             color = &quot;#292f33&quot;) + 
+                  annotate(&quot;text&quot;, label = df$time.by.min[1], x = -95, y = 20, 
+                              size = 8) + 
+                  theme_void() + 
+                  theme(legend.position = &quot;none&quot;)
+            
+            print(p1)
+      }
+}, interval = 0.125, ani.width = 1028, ani.height = 514, 
+movie.name = &quot;sunrise-tweets-7h-8fps.gif&quot;)
+</code></pre>
+</div>
+
+    
+    
+
+    
+
+    
+
+        <h4 class="page-header">Comments</h4>
+
+        <div id="disqus_thread"></div>
+<script>
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "username" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+    
+
+</main>
+
+        <footer>
+
+            <p class="copyright text-muted">&copy; All rights reserved. Powered by <a href="https://gohugo.io">Hugo</a> and <a href="https://github.com/calintat/minimal">Minimal</a></p>
+
+        </footer>
+       
+    </body>
+
+</html>
+
