@@ -175,13 +175,15 @@
 
 <p>The way Twitter filters for location is by using latitude and longitude coordinates to draw a rectangle around a given area on a map. Because the US isn&rsquo;t perfectly rectangular, it did pull some data from Canada and Mexico. It is possible to filter these data out after the fact, but for my purposes I decided to leave them.</p>
 
-<p>In the end, I captured 609499 tweets in the seven hour window, with an average of 1451 tweets per minute, and a range of 677-2562 tweets per minute. Again, remember that this is just a subset of a random sample of all the public tweets that are happening.</p>
+<p>In the end, I captured 365530 tweets in the seven hour window, with an average of 860 tweets per minute, and a range of 207-2087 tweets per minute. Again, remember that this is just a subset of a random sample of all the public tweets that are happening in the US mainland.</p>
 
 <h1 id="data-visualization">Data Visualization</h1>
 
 <p>Here&rsquo;s what the map looks like!</p>
 
-<div style='position:relative;padding-bottom:50%'><iframe src='https://gfycat.com/ifr/HardtofindExemplaryCanvasback?hd=1' frameborder='0' scrolling='no' width='100%' height='100%' style='position:absolute;top:0;left:0;' allowfullscreen></iframe></div>
+<div style='position:relative;padding-bottom:50%'><iframe src='https://gfycat.com/ifr/FearfulRemoteDassie?hd=1' frameborder='0' scrolling='no' width='100%' height='100%' style='position:absolute;top:0;left:0;' allowfullscreen></iframe></div>
+
+<p>The red lines indicate the median longitude and latitude values for each timepoint. It appears that there is overall more use in the eastern part of the US compared to the western part, but this could be due to both population and time of day.</p>
 
 <h1 id="methods">Methods</h1>
 
@@ -197,11 +199,11 @@ library(ROAuth)
 # AUTHENTICATE FIRST; CODE NOT SHOWN HERE
 
 # Coordinates for USA
-usa &lt;- c(-124.848974,24.396308,66.53076,49.23037)
+usa &lt;- c(-124.848974,24.396308,-66.53076,49.23037)
 
- # 7 hours = 25,200 seconds
+ # 7 hours + 5 minutes = 25,500 seconds
 filterStream(file.name = &quot;sunriseTrack-7h.json&quot;, oauth = my_oauth, 
-            locations = usa, timeout = 25200)
+            locations = usa, timeout = 25500)
 </code></pre>
 
 <h2 id="data-processing">Data Processing</h2>
@@ -211,7 +213,7 @@ filterStream(file.name = &quot;sunriseTrack-7h.json&quot;, oauth = my_oauth,
 <pre><code class="language-r">library(dplyr)
 library(lubridate)
 
-parsed &lt;- parseTweets(&quot;sunriseTrack-7h.json&quot;)
+parsed &lt;- parseTweets(&quot;sunriseTrack-7h-2.json&quot;)
 parsed &lt;- tbl_df(parsed)
 
 # Grab the columns we want, filter out any NA entries, and do some mutations to get the data types we want
@@ -267,10 +269,16 @@ saveGIF ({
                   df &lt;- ungroup(df) %&gt;%
                         mutate(alphaVal = alphalist)
                   
+                  newInd &lt;- (len.prevmatch+1):length(df$place_lat)
+                  medPosn &lt;- as.data.frame(t(c(lat = median(df$place_lat[newInd]), 
+                                               lon = median(df$place_lon[newInd]))))
+                  
             } else {
                   match &lt;- tweets.by.minute[i,1]
                   df &lt;- filter(locations, time.by.min %in% match) %&gt;% 
                         mutate(alphaVal = rep(1, n()))
+                  medPosn &lt;- as.data.frame(t(c(lat = median(df$place_lat), 
+                                               lon = median(df$place_lon))))
             }
             
             p1 &lt;- ggplot(data = statemap, aes(x = long, y = lat, group = group)) +
@@ -279,15 +287,21 @@ saveGIF ({
                   geom_point(data = df, aes(x = place_lon, y = place_lat), 
                              alpha = df$alphaVal, size = 3, inherit.aes = FALSE, 
                              color = &quot;#292f33&quot;) + 
-                  annotate(&quot;text&quot;, label = df$time.by.min[1], x = -95, y = 20, 
-                              size = 8) + 
+                  geom_point(data = medPosn, aes(x = lon, y = lat), 
+                             color = &quot;red&quot;, size = 3, inherit.aes = FALSE) + 
+                  geom_vline(data = medPosn, xintercept = medPosn$lon, 
+                             color = &quot;red&quot;, size = .5) +
+                  geom_hline(data = medPosn, yintercept = medPosn$lat, 
+                             color = &quot;red&quot;, size = .5) +
+                  annotate(&quot;text&quot;, label = df$time.by.min[length(df$time.by.min)], x = -95, y = 20, 
+                           size = 8) + 
                   theme_void() + 
                   theme(legend.position = &quot;none&quot;)
             
             print(p1)
       }
 }, interval = 0.125, ani.width = 1028, ani.height = 514, 
-movie.name = &quot;sunrise-tweets-7h-8fps.gif&quot;)
+movie.name = &quot;sunrise-tweets-7h-8fps-2.gif&quot;)
 </code></pre>
 </div>
 
